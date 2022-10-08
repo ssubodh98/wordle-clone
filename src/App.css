@@ -2,6 +2,7 @@
   text-align: center;
   background-color: #121213;
   color: white;
+  max-height: -webkit-fill-available;
   height: 100vh;
   display: flex;
   flex-direction: column;

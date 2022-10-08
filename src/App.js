@@ -53,46 +53,46 @@ function App() {
           <div class="Board-module">
             <div class="Board-module-board">
               <div class="row">
-                <div class="cube col-2">A</div>
-                <div class="cube col-2">P</div>
-                <div class="cube col-2">P</div>
-                <div class="cube col-2">L</div>
-                <div class="cube col-2">E</div>
+                <div class="cube line1 col-2">A</div>
+                <div class="cube line1 col-2">P</div>
+                <div class="cube line1 col-2">P</div>
+                <div class="cube line1 col-2">L</div>
+                <div class="cube line1 col-2">E</div>
               </div>
               <div class="row">
-                <div class="cube col-2">O</div>
-                <div class="cube col-2"></div>
-                <div class="cube col-2">1</div>
-                <div class="cube col-2">2</div>
-                <div class="cube col-2">1</div>
+                <div class="cube line2 col-2"></div>
+                <div class="cube line2 col-2"></div>
+                <div class="cube line2 col-2"></div>
+                <div class="cube line2 col-2"></div>
+                <div class="cube line2 col-2"></div>
               </div>
               <div class="row">
-                <div class="cube col-2">1</div>
-                <div class="cube col-2">2</div>
-                <div class="cube col-2">1</div>
-                <div class="cube col-2">2</div>
-                <div class="cube col-2">1</div>
+                <div class="cube line3 col-2"></div>
+                <div class="cube line3 col-2"></div>
+                <div class="cube line3 col-2"></div>
+                <div class="cube line3 col-2"></div>
+                <div class="cube line3 col-2"></div>
               </div>
               <div class="row">
-                <div class="cube col-2">1</div>
-                <div class="cube col-2">2</div>
-                <div class="cube col-2">1</div>
-                <div class="cube col-2">2</div>
-                <div class="cube col-2">1</div>
+                <div class="cube line4 col-2"></div>
+                <div class="cube line4 col-2"></div>
+                <div class="cube line4 col-2"></div>
+                <div class="cube line4 col-2"></div>
+                <div class="cube line4 col-2"></div>
               </div>
               <div class="row">
-                <div class="cube col-2">1</div>
-                <div class="cube col-2">2</div>
-                <div class="cube col-2">1</div>
-                <div class="cube col-2">2</div>
-                <div class="cube col-2">1</div>
+                <div class="cube  line5 col-2"></div>
+                <div class="cube  line5 col-2"></div>
+                <div class="cube  line5 col-2"></div>
+                <div class="cube  line5 col-2"></div>
+                <div class="cube  line5 col-2"></div>
               </div>
               <div class="row">
-                <div class="cube col-2">1</div>
-                <div class="cube col-2">2</div>
-                <div class="cube col-2">1</div>
-                <div class="cube col-2">2</div>
-                <div class="cube col-2">1</div>
+                <div class="cube line6 col-2"></div>
+                <div class="cube line6 col-2"></div>
+                <div class="cube line6 col-2"></div>
+                <div class="cube line6 col-2"></div>
+                <div class="cube line6 col-2"></div>
               </div>
             </div>
             
