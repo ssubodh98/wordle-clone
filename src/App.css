@@ -1,38 +1,95 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #121213;
+  color: white;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+.App .game-header{
+  height: 65px;
+}
+.App .offcanvas-body li:hover{
+  background-color: #2f2f31;
+
+}
+
+.App .navbar{
+  background-color: #121213;
+  border-bottom: 1px solid #3a3a3c;
+  padding: 0;
+}
+
+.App .navbar-brand{
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 0;
+}
+@media (max-width: 992px) {
+  .App .navbar-brand{
+    font-size: 28px;
+  }
+}
+
+.side-buttons .side-buttons-icons{
+ letter-spacing: 2em;
+ cursor: pointer;
+}
+
+.game-body{
+  width: 100%;
+  max-width: 500px;
+  margin:0 auto;
+  height: calc(100% - 65px);
+  vertical-align: middle;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.Board-module{
+  
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+
+.Board-module-board .cube{
+  background-color: #121213;
+  width: 100%;
+  display: inline-flex;
+  width: 2em;
+  height: 1.5em;
+  font-size: 2rem;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  box-sizing: border-box;
+  border: 2px solid #3a3a3c;
+  vertical-align: middle;
+}
+
+.Keyboard-module{
+  height: 200px;
+  /* margin: 0 8px; */
+
+  background-color: black;
+  /* border: 1px solid red; */
+}
+
+.Keyboard-module .keyboard-button{
+  /* margin: 0 6px 0 0; */
+  height: 58px;
+  border-radius: 4px;
+  /* width: 8vw; */
+  display: inline-block;
+  margin-left: 1vw;
+  padding-left: 2vw;
+  padding-right: 2vw;
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  background-color: #818384;
 }
