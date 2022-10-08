@@ -1,8 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import { AiFillSetting } from "react-icons/ai";
 import { BsBarChartLineFill } from "react-icons/bs";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
+import { BsBackspace } from "react-icons/bs"
+
 
 
 function App() {
@@ -122,7 +123,7 @@ function App() {
                   <button class="keyboard-button">l</button>
                 </div>
               <div class="third-row">
-                  <button class="keyboard-button">Del</button>
+                  <button class="keyboard-button">Enter</button>
                   <button class="keyboard-button">z</button>
                   <button class="keyboard-button">x</button>
                   <button class="keyboard-button">c</button>
@@ -130,7 +131,7 @@ function App() {
                   <button class="keyboard-button">b</button>
                   <button class="keyboard-button">n</button>
                   <button class="keyboard-button">m</button>
-                  <button class="keyboard-button">Enter</button>
+                  <button class="keyboard-button"><BsBackspace/></button>
               </div>
             </div>
           </div>

@@ -39,10 +39,10 @@
 }
 
 .game-body{
-  width: 100%;
+  
   max-width: 500px;
   margin:0 auto;
-  height: calc(100% - 65px);
+  height: calc(100vh - 65px);
   vertical-align: middle;
   
   display: flex;
@@ -57,7 +57,9 @@
   flex-grow: 1;
   overflow: hidden;
 }
-
+.Board-module-board .row{
+  gap:5px;
+}
 
 .Board-module-board .cube{
   background-color: #121213;
@@ -85,12 +87,17 @@
 .Keyboard-module .keyboard-button{
   /* margin: 0 6px 0 0; */
   height: 58px;
-  border-radius: 4px;
+  border-radius: 10%;
   /* width: 8vw; */
   display: inline-block;
-  margin-left: 1vw;
-  padding-left: 2vw;
-  padding-right: 2vw;
+  margin-left: 0.5vw;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
   color: white;
   background-color: #818384;
+  text-transform: uppercase;
+}
+.first-row, .second-row, .third-row{
+    display: flex;
+    justify-content: center;  
 }
