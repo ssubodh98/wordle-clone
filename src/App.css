@@ -18,6 +18,7 @@
   background-color: #121213;
   border-bottom: 1px solid #3a3a3c;
   padding: 0;
+  height: 65px;
 }
 
 .App .navbar-brand{
@@ -63,7 +64,7 @@
   width: 100%;
   display: inline-flex;
   width: 2em;
-  height: 1.5em;
+  height: 2em;
   font-size: 2rem;
   justify-content: center;
   align-items: center;
