@@ -1,6 +1,14 @@
+:root {
+  --color-correct: #538d4e;
+  --color-absent: #3a3a3c;
+  --color-present:  #b59f3b;
+  --key-bg: #818384;
+  --bg-black-color:#121213;
+}
+
 .App {
   text-align: center;
-  background-color: #121213;
+  background-color: var(--bg-black-color);
   color: white;
   max-height: -webkit-fill-available;
   height: 100vh;
@@ -12,11 +20,10 @@
 }
 .App .offcanvas-body li:hover{
   background-color: #2f2f31;
-
 }
 
 .App .navbar{
-  background-color: #121213;
+  background-color: var(--bg-black-color);
   border-bottom: 1px solid #3a3a3c;
   padding: 0;
   height: 65px;
@@ -38,6 +45,9 @@
  letter-spacing: 2em;
  cursor: pointer;
 }
+.navbar-brand{
+  margin-left: 8%;
+}
 
 .game-body{
   
@@ -45,7 +55,6 @@
   margin:0 auto;
   height: calc(100vh - 65px);
   vertical-align: middle;
-  
   display: flex;
   flex-direction: column;
 }
@@ -64,7 +73,7 @@
 }
 
 .Board-module-board .cube{
-  background-color: #121213;
+  background-color: var(--bg-black-color);
   width: 100%;
   display: inline-flex;
   width: 2em;
@@ -78,11 +87,15 @@
   vertical-align: middle;
 }
 
+.keyboard-button:focus {
+  border: solid 2px #00c;
+}
+
 .Keyboard-module{
   height: 200px;
   /* margin: 0 8px; */
 
-  background-color: #121213;
+  background-color: var(--bg-black-color);
   /* border: 1px solid red; */
 }
 
@@ -96,7 +109,7 @@
   padding-left: 1.5vw;
   padding-right: 1.5vw;
   color: white;
-  background-color: #818384;
+  background-color: var(--key-bg);
   text-transform: uppercase;
 }
 .first-row, .second-row, .third-row{

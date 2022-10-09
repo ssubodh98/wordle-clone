@@ -3,39 +3,132 @@ import { AiFillSetting } from "react-icons/ai";
 import { BsBarChartLineFill } from "react-icons/bs";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { BsBackspace } from "react-icons/bs"
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  let CurBox=0;
+  let CurRow=1;
+  let guessword="APPLE";//temp
+
+  function buttonclicked(e) {
+    if(CurBox<5){
+      console.log(CurRow);
+      const allWithClass = Array.from(
+        document.getElementsByClassName('line'+CurRow)
+      );
+
+      allWithClass[CurBox].innerHTML=e.target.value;
+      // var r = document.querySelector(':root');
+      // var rs = getComputedStyle(r);
+      // allWithClass[CurBox].style.backgroundColor = rs.getPropertyValue('--key-bg');
+      // console.log(allWithClass[0].value);
+      //document.getElementById("fir").innerHTML=e.target.value;
+      CurBox++;
+    }
+  }
+
+  function submitclicked() {
+    let typeWord=getTypedWord();
+    const allWithClass = Array.from(
+      document.getElementsByClassName('line'+CurRow)
+    );
+
+    if(CurBox<5){
+      toast.warn('Not Enough Letters!', {
+        position: "top-center",
+        autoClose: 400,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        });
+    }else{
+      console.log(typeWord);
+      if(typeWord===guessword){
+        console.log("correct");
+      }else{
+        console.log("wrong");
+      }
+
+      let tempGuess=guessword;
+      var r = document.querySelector(':root');
+      var rs = getComputedStyle(r);
+      for(let i=0;i<5;i++){
+        if(typeWord.charAt(i)===guessword.charAt(i)){
+          allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-correct');
+          //tempGuess.charAt(i)=" ";
+          tempGuess = tempGuess.split('');
+          tempGuess[i] = ' ';
+          tempGuess = tempGuess.join('');
+          console.log("tempGuess",tempGuess);
+        }else if(tempGuess.indexOf(typeWord.charAt(i))>-1){
+          allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-present');
+        }else{
+          allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-absent');
+        }
+        
+      }
+      
+    }
+    CurBox=0;
+    CurRow=CurRow+1;
+  }
+  
+  function delclicked() {
+    // let typeWord=getTypedWord();
+    // console.log(typeWord.substring(0,CurBox-1));
+    const allWithClass = Array.from(
+      document.getElementsByClassName('line'+CurRow)
+    );
+    allWithClass[CurBox-1].innerHTML="";
+    CurBox--;
+  }
+
+  function getTypedWord() {
+    let typeWord="";
+    const allWithClass = Array.from(
+      document.getElementsByClassName('line'+CurRow)
+    );
+    for(let i=0;i<CurBox;i++){
+      typeWord+=allWithClass[i].innerHTML;
+    }
+    //console.log(typeWord);
+    return typeWord;
+  }
+
   return (
+    
     <div className="App">
-      <div class="container game-header">
+      <ToastContainer/>
+      <div className="container game-header">
         {/* <header> */}
-          <nav class="navbar navbar-dark fixed-top">
-            <div class="container-fluid">
-              <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-                <span class="navbar-toggler-icon"></span>
+          <nav className="navbar navbar-dark fixed-top">
+            <div className="container-fluid">
+              <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                <span className="navbar-toggler-icon"></span>
               </button>
-              <a class="navbar-brand" href="#">Wordle</a>
-              <div class="side-buttons">
-                <span class="side-buttons-icons"><BsFillQuestionCircleFill size={30}/></span>
-                <span class="side-buttons-icons px-3"><BsBarChartLineFill size={30}/></span>
-                <span class="side-buttons-icons"><AiFillSetting size={30}/></span>
+              <a className="navbar-brand" href="#">Wordle</a>
+              <div className="side-buttons">
+                <span className="side-buttons-icons"><BsFillQuestionCircleFill size={30}/></span>
+                <span className="side-buttons-icons px-3"><BsBarChartLineFill size={30}/></span>
+                <span className="side-buttons-icons"><AiFillSetting size={30}/></span>
 
               </div>
               
-              <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-                <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Games</h5>
-                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              <div className="offcanvas offcanvas-start text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div className="offcanvas-header">
+                  <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">Games</h5>
+                  <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div class="offcanvas-body">
-                  <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <div className="offcanvas-body">
+                  <ul className="navbar-nav justify-content-start flex-grow-1 pe-3">
+                    <li className="nav-item">
+                      <a className="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Link</a>
+                    <li className="nav-item">
+                      <a className="nav-link" href="#">Link</a>
                     </li>
                   
                   </ul>
@@ -48,90 +141,91 @@ function App() {
     
         {/* </header> */}
       </div>
-      <div class="container game-body">
+      
+      <div className="container game-body">
         
-          <div class="Board-module">
-            <div class="Board-module-board">
-              <div class="row">
-                <div class="cube line1 col-2">A</div>
-                <div class="cube line1 col-2">P</div>
-                <div class="cube line1 col-2">P</div>
-                <div class="cube line1 col-2">L</div>
-                <div class="cube line1 col-2">E</div>
+          <div className="Board-module">
+            <div className="Board-module-board">
+              <div className="row">
+                <div className="cube line1 col-2"></div>
+                <div className="cube line1 col-2"></div>
+                <div className="cube line1 col-2"></div>
+                <div className="cube line1 col-2"></div>
+                <div className="cube line1 col-2"></div>
               </div>
-              <div class="row">
-                <div class="cube line2 col-2"></div>
-                <div class="cube line2 col-2"></div>
-                <div class="cube line2 col-2"></div>
-                <div class="cube line2 col-2"></div>
-                <div class="cube line2 col-2"></div>
+              <div className="row">
+                <div className="cube line2 col-2"></div>
+                <div className="cube line2 col-2"></div>
+                <div className="cube line2 col-2"></div>
+                <div className="cube line2 col-2"></div>
+                <div className="cube line2 col-2"></div>
               </div>
-              <div class="row">
-                <div class="cube line3 col-2"></div>
-                <div class="cube line3 col-2"></div>
-                <div class="cube line3 col-2"></div>
-                <div class="cube line3 col-2"></div>
-                <div class="cube line3 col-2"></div>
+              <div className="row">
+                <div className="cube line3 col-2"></div>
+                <div className="cube line3 col-2"></div>
+                <div className="cube line3 col-2"></div>
+                <div className="cube line3 col-2"></div>
+                <div className="cube line3 col-2"></div>
               </div>
-              <div class="row">
-                <div class="cube line4 col-2"></div>
-                <div class="cube line4 col-2"></div>
-                <div class="cube line4 col-2"></div>
-                <div class="cube line4 col-2"></div>
-                <div class="cube line4 col-2"></div>
+              <div className="row">
+                <div className="cube line4 col-2"></div>
+                <div className="cube line4 col-2"></div>
+                <div className="cube line4 col-2"></div>
+                <div className="cube line4 col-2"></div>
+                <div className="cube line4 col-2"></div>
               </div>
-              <div class="row">
-                <div class="cube  line5 col-2"></div>
-                <div class="cube  line5 col-2"></div>
-                <div class="cube  line5 col-2"></div>
-                <div class="cube  line5 col-2"></div>
-                <div class="cube  line5 col-2"></div>
+              <div className="row">
+                <div className="cube  line5 col-2"></div>
+                <div className="cube  line5 col-2"></div>
+                <div className="cube  line5 col-2"></div>
+                <div className="cube  line5 col-2"></div>
+                <div className="cube  line5 col-2"></div>
               </div>
-              <div class="row">
-                <div class="cube line6 col-2"></div>
-                <div class="cube line6 col-2"></div>
-                <div class="cube line6 col-2"></div>
-                <div class="cube line6 col-2"></div>
-                <div class="cube line6 col-2"></div>
+              <div className="row">
+                <div className="cube line6 col-2"></div>
+                <div className="cube line6 col-2"></div>
+                <div className="cube line6 col-2"></div>
+                <div className="cube line6 col-2"></div>
+                <div className="cube line6 col-2"></div>
               </div>
             </div>
             
           </div>
-          <div class="Keyboard-module">
+          <div className="Keyboard-module">
             <div id="keyboard-cont">
-                <div class="first-row">
-                    <button class="keyboard-button">q</button>
-                    <button class="keyboard-button">w</button>
-                    <button class="keyboard-button">e</button>
-                    <button class="keyboard-button">r</button>
-                    <button class="keyboard-button">t</button>
-                    <button class="keyboard-button">y</button>
-                    <button class="keyboard-button">u</button>
-                    <button class="keyboard-button">i</button>
-                    <button class="keyboard-button">o</button>
-                    <button class="keyboard-button">p</button>
+                <div className="first-row">
+                    <button className="keyboard-button" value="Q"  onClick={buttonclicked}>q</button>
+                    <button className="keyboard-button" value="W"  onClick={buttonclicked}>w</button>
+                    <button className="keyboard-button" value="E"  onClick={buttonclicked}>e</button>
+                    <button className="keyboard-button" value="R"  onClick={buttonclicked}>r</button>
+                    <button className="keyboard-button" value="T"  onClick={buttonclicked}>t</button>
+                    <button className="keyboard-button" value="Y"  onClick={buttonclicked}>y</button>
+                    <button className="keyboard-button" value="U"  onClick={buttonclicked}>u</button>
+                    <button className="keyboard-button" value="I"  onClick={buttonclicked}>i</button>
+                    <button className="keyboard-button" value="O"  onClick={buttonclicked}>o</button>
+                    <button className="keyboard-button" value="P"  onClick={buttonclicked}>p</button>
                   </div>
-                <div class="second-row">
-                  <button class="keyboard-button">a</button>
-                  <button class="keyboard-button">s</button>
-                  <button class="keyboard-button">d</button>
-                  <button class="keyboard-button">f</button>
-                  <button class="keyboard-button">g</button>
-                  <button class="keyboard-button">h</button>
-                  <button class="keyboard-button">j</button>
-                  <button class="keyboard-button">k</button>
-                  <button class="keyboard-button">l</button>
+                <div className="second-row">
+                  <button className="keyboard-button" value="A" onClick={buttonclicked}>a</button>
+                  <button className="keyboard-button" value="S" onClick={buttonclicked}>s</button>
+                  <button className="keyboard-button" value="D" onClick={buttonclicked}>d</button>
+                  <button className="keyboard-button" value="F" onClick={buttonclicked}>f</button>
+                  <button className="keyboard-button" value="G" onClick={buttonclicked}>g</button>
+                  <button className="keyboard-button" value="H" onClick={buttonclicked}>h</button>
+                  <button className="keyboard-button" value="J" onClick={buttonclicked}>j</button>
+                  <button className="keyboard-button" value="K" onClick={buttonclicked}>k</button>
+                  <button className="keyboard-button" value="L" onClick={buttonclicked}>l</button>
                 </div>
-              <div class="third-row">
-                  <button class="keyboard-button">Enter</button>
-                  <button class="keyboard-button">z</button>
-                  <button class="keyboard-button">x</button>
-                  <button class="keyboard-button">c</button>
-                  <button class="keyboard-button">v</button>
-                  <button class="keyboard-button">b</button>
-                  <button class="keyboard-button">n</button>
-                  <button class="keyboard-button">m</button>
-                  <button class="keyboard-button"><BsBackspace/></button>
+              <div className="third-row">
+                  <button className="keyboard-button" value="Enter" onClick={submitclicked}>Enter</button>
+                  <button className="keyboard-button" value="Z" onClick={buttonclicked}>z</button>
+                  <button className="keyboard-button" value="X" onClick={buttonclicked}>x</button>
+                  <button className="keyboard-button" value="C" onClick={buttonclicked}>c</button>
+                  <button className="keyboard-button" value="V" onClick={buttonclicked}>v</button>
+                  <button className="keyboard-button" value="B" onClick={buttonclicked}>b</button>
+                  <button className="keyboard-button" value="N" onClick={buttonclicked}>n</button>
+                  <button className="keyboard-button" value="M" onClick={buttonclicked}>m</button>
+                  <button className="keyboard-button" value="Del" onClick={delclicked}><BsBackspace/></button>
               </div>
             </div>
           </div>
@@ -140,6 +234,7 @@ function App() {
 
        
       </div>
+     
 
 
 
