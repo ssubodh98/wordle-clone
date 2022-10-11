@@ -6,7 +6,7 @@ body{
 .App {
   text-align: center;
   background-color: var(--bg-black-color);
-  color: white;
+  color: var(--app-color);
   /* max-content */
   /* height: 100vh; */
   max-height: -webkit-fill-available;
@@ -49,6 +49,8 @@ body{
 .side-buttons .side-buttons-icons{
  letter-spacing: 2em;
  cursor: pointer;
+ color: var(--app-color);
+ background-color: var(--bg-black-color);
 }
 .navbar-brand{
   margin-left: 8%;
@@ -117,7 +119,7 @@ body{
     font-weight: bold;
     vertical-align: middle;
     box-sizing: border-box;
-    color: white;
+    color: var(--app-color);
     text-transform: uppercase;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -125,9 +127,7 @@ body{
     user-select: none;
 }
 
-.keyboard-button:focus {
-  border: solid 2px #00c;
-}
+
 
 .Keyboard-module{
   height: 200px;
@@ -135,6 +135,10 @@ body{
 
   background-color: var(--bg-black-color);
   /* border: 1px solid red; */
+}
+
+.Keyboard-module .keyboard-button:focus {
+  border: solid 1px #00c;
 }
 
 .Keyboard-module .keyboard-button{
@@ -147,7 +151,7 @@ body{
   margin-left: 0.5vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  color: white;
+  color: var(--app-color);
   background-color: var(--key-bg);
   text-transform: uppercase; */
 
@@ -164,7 +168,7 @@ body{
   -ms-user-select: none;
   user-select: none;
   background-color: var(--key-bg);
-  color: white;
+  color: var(--app-color);
   flex: 1;
   display: flex;
   justify-content: center;
@@ -180,3 +184,49 @@ body{
     margin: 0 auto 8px;
     touch-action: manipulation;
 }
+
+.flex-div{
+  flex: 0.5;
+}
+
+#settings-modal .modal-content{
+  background-color: var(--bg-black-color);
+}
+
+#settings-modal .modal-header{
+  border-bottom: none;
+}
+
+#settings-modal .modal-body{
+  display: flex;
+  flex-direction: column;
+}
+.settings-options{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-tone-4);
+  padding: 16px 0;
+}
+.settings-options-texts{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.settings-options-texts small{
+  /* font-size: 12px; */
+  color: var(--color-tone-2);
+}
+.settings-options-side{
+  color: var(--color-tone-2);
+}
+small{
+  font-size: 0.7em;
+}
+
+
+
+/* #settings-modal .modal-footer{
+  justify-content: center;
+} */
+
