@@ -10,8 +10,10 @@
   text-align: center;
   background-color: var(--bg-black-color);
   color: white;
-  max-height: -webkit-fill-available;
+  /* max-content */
   height: 100vh;
+  max-height: -webkit-fill-available;
+  
   display: flex;
   flex-direction: column;
 }
@@ -70,6 +72,7 @@
 }
 .Board-module-board .row{
   gap:5px;
+  margin-top: 5px;
 }
 
 .Board-module-board .cube{
