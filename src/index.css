@@ -1,3 +1,12 @@
+:root {
+  --color-correct: #538d4e;
+  --color-absent: #3a3a3c;
+  --color-present:  #b59f3b;
+  --key-bg: #818384;
+  --bg-black-color:#121213;
+}
+
 body{
   color: white;
+  background-color: var(--bg-black-color);
 }

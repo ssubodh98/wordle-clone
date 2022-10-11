@@ -101,8 +101,8 @@ function App() {
   return (
     
     <div className="App">
-      <ToastContainer/>
-      <div className="container game-header">
+      
+      <div className="game-header">
         {/* <header> */}
           <nav className="navbar navbar-dark fixed-top">
             <div className="container-fluid">
@@ -142,46 +142,46 @@ function App() {
         {/* </header> */}
       </div>
       
-      <div className="container game-body">
+      <div className="game-body">
         
           <div className="Board-module">
             <div className="Board-module-board">
-              <div className="row">
+              <div className="board-row">
                 <div className="cube line1 col-2"></div>
                 <div className="cube line1 col-2"></div>
                 <div className="cube line1 col-2"></div>
                 <div className="cube line1 col-2"></div>
                 <div className="cube line1 col-2"></div>
               </div>
-              <div className="row">
+              <div className="board-row">
                 <div className="cube line2 col-2"></div>
                 <div className="cube line2 col-2"></div>
                 <div className="cube line2 col-2"></div>
                 <div className="cube line2 col-2"></div>
                 <div className="cube line2 col-2"></div>
               </div>
-              <div className="row">
+              <div className="board-row">
                 <div className="cube line3 col-2"></div>
                 <div className="cube line3 col-2"></div>
                 <div className="cube line3 col-2"></div>
                 <div className="cube line3 col-2"></div>
                 <div className="cube line3 col-2"></div>
               </div>
-              <div className="row">
+              <div className="board-row">
                 <div className="cube line4 col-2"></div>
                 <div className="cube line4 col-2"></div>
                 <div className="cube line4 col-2"></div>
                 <div className="cube line4 col-2"></div>
                 <div className="cube line4 col-2"></div>
               </div>
-              <div className="row">
+              <div className="board-row">
                 <div className="cube  line5 col-2"></div>
                 <div className="cube  line5 col-2"></div>
                 <div className="cube  line5 col-2"></div>
                 <div className="cube  line5 col-2"></div>
                 <div className="cube  line5 col-2"></div>
               </div>
-              <div className="row">
+              <div className="board-row">
                 <div className="cube line6 col-2"></div>
                 <div className="cube line6 col-2"></div>
                 <div className="cube line6 col-2"></div>
@@ -230,7 +230,7 @@ function App() {
             </div>
           </div>
           
-
+          <ToastContainer/>
 
        
       </div>

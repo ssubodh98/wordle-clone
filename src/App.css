@@ -1,21 +1,24 @@
-:root {
-  --color-correct: #538d4e;
-  --color-absent: #3a3a3c;
-  --color-present:  #b59f3b;
-  --key-bg: #818384;
-  --bg-black-color:#121213;
-}
 
+/* 
+body{
+  background-color: var(--bg-black-color);
+} */
 .App {
   text-align: center;
   background-color: var(--bg-black-color);
   color: white;
   /* max-content */
-  height: 100vh;
+  /* height: 100vh; */
   max-height: -webkit-fill-available;
   
   display: flex;
   flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 .App .game-header{
   height: 65px;
@@ -52,10 +55,11 @@
 }
 
 .game-body{
-  
+  width: 100%;
   max-width: 500px;
   margin:0 auto;
-  height: calc(100vh - 65px);
+  margin-top: 5%;
+  /* height: calc(100% - 65px); */
   vertical-align: middle;
   display: flex;
   flex-direction: column;
@@ -68,15 +72,28 @@
   align-items: center;
   flex-grow: 1;
   overflow: hidden;
-  height: calc(100% - 200px);
-}
-.Board-module-board .row{
-  gap:5px;
-  margin-top: 5px;
-}
+  /* height: calc(100% - 200px); */
 
+}
+.Board-module-board{
+    width: 350px;
+    height: 420px;
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-gap: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.Board-module-board .board-row{
+  /* gap:5px;
+  margin-top: 5px; */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5px;
+
+}
 .Board-module-board .cube{
-  background-color: var(--bg-black-color);
+  /* background-color: var(--bg-black-color);
   width: 100%;
   display: inline-flex;
   width: 2em;
@@ -88,6 +105,24 @@
   box-sizing: border-box;
   border: 2px solid #3a3a3c;
   vertical-align: middle;
+  width: 100%; */
+  background-color: var(--bg-black-color);
+  border: 2px solid #3a3a3c;
+  width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: bold;
+    vertical-align: middle;
+    box-sizing: border-box;
+    color: white;
+    text-transform: uppercase;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .keyboard-button:focus {
@@ -104,18 +139,44 @@
 
 .Keyboard-module .keyboard-button{
   /* margin: 0 6px 0 0; */
-  height: 58px;
-  border-radius: 10%;
   /* width: 8vw; */
+  /* height: 58px;
+  border-radius: 10%;
+  
   display: inline-block;
   margin-left: 0.5vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
   color: white;
   background-color: var(--key-bg);
+  text-transform: uppercase; */
+
+  font-family: inherit;
+  font-weight: bold;
+  border: 0;
+  padding: 0;
+  margin: 0 6px 0 0;
+  height: 58px;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: var(--key-bg);
+  color: white;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-transform: uppercase;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
 }
 .first-row, .second-row, .third-row{
+    /* display: flex;
+    justify-content: center;   */
     display: flex;
-    justify-content: center;  
+    width: 100%;
+    margin: 0 auto 8px;
+    touch-action: manipulation;
 }
