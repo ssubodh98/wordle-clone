@@ -4,7 +4,7 @@ import { BsBarChartLineFill } from "react-icons/bs";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { BsBackspace } from "react-icons/bs"
 import { AiOutlineEnter } from "react-icons/ai";
-import { AiOutlineClose } from "react-icons/ai";
+// import { AiOutlineClose } from "react-icons/ai";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -114,10 +114,10 @@ function App() {
               </button>
               <a className="navbar-brand" href="#">Wordle</a>
               <div className="side-buttons">
-                <button className="side-buttons-icons" type="button" data-bs-toggle="modal" data-bs-target="#settings-modal">
+                <button className="side-buttons-icons" type="button" data-bs-toggle="modal" data-bs-target="#how-modal">
                   <BsFillQuestionCircleFill size={30}/>
                 </button>
-                <button className="side-buttons-icons px-3" type="button" data-bs-toggle="modal" data-bs-target="#settings-modal">
+                <button className="side-buttons-icons px-3" type="button" data-bs-toggle="modal" data-bs-target="#statitics-modal">
                   <BsBarChartLineFill size={30}/>
                 </button>
                 <button className="side-buttons-icons" type="button" data-bs-toggle="modal" data-bs-target="#settings-modal">
@@ -262,6 +262,191 @@ function App() {
                 This website is developed only for Educational purpose
               </small>
             </div> */}
+          </div>
+        </div>
+      </div>
+
+      {/* How to play Modal */}
+      <div className="modal" id="how-modal" tabIndex="-3" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-scrollable">
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="flex-div"></div>
+              <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              <div className="how-options">
+                <h3>How To Play</h3>
+                
+                <h5>Guess the Wordle in 6 tries.</h5>
+
+                <div className="bullets">
+                  <ul>
+                    <li>Each guess must be a valid 5-letter word.</li>
+                    <li>The color of the tiles will change to show how close your guess was to the word.</li>
+                  </ul>
+                </div>
+                <div className="examples  mb-3">
+                  <div>Examples</div>
+                  <div className="how-row">
+                    <div className="cube exm correct col-2">W</div>
+                    <div className="cube exm col-2">E</div>
+                    <div className="cube exm col-2">A</div>
+                    <div className="cube exm col-2">R</div>
+                    <div className="cube exm col-2">Y</div>
+                  </div>
+                  <div>W is in the word and in the correct spot.</div>
+                </div>
+                <div className="examples mb-3">
+                  <div className="how-row">
+                    <div className="cube exm col-2">P</div>
+                    <div className="cube exm present col-2">I</div>
+                    <div className="cube exm col-2">L</div>
+                    <div className="cube exm col-2">L</div>
+                    <div className="cube exm col-2">S</div>
+                  </div>
+                  <div>I is in the word but in the wrong spot.</div>
+                </div>
+                <div className="examples mb-3">
+                  <div className="how-row">
+                    <div className="cube exm col-2">V</div>
+                    <div className="cube exm col-2">A</div>
+                    <div className="cube exm col-2">G</div>
+                    <div className="cube exm absent col-2">U</div>
+                    <div className="cube exm col-2">E</div>
+                  </div>
+                  <div>U is not in the word in any spot.</div>
+                </div>
+              
+                 
+                
+             
+               
+                
+              </div>
+              
+
+            
+
+              <div>
+                <div className="how-footer">
+                  A new puzzle is released daily at midnight. If you haven’t already, you can <a href = "#">sign up</a> for our daily reminder email.
+                </div>
+                <div className="how-footer">
+                  Have feedback? Email us at <a href = "#">xyz@xyz.com</a>.
+                </div>
+              </div>
+
+              
+
+
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Statitics Modal */}
+      <div className="modal" id="statitics-modal" tabIndex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-scrollable">
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="flex-div"></div>
+              <h5 className="modal-title" id="exampleModalLabel">SETTINGS</h5>
+              <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+              {/* <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close">
+                <AiOutlineClose/>
+              </button> */}
+            </div>
+            <div className="modal-body">
+              <div className="settings-options">
+                <div className="settings-options-texts">
+                  <div>
+                    Hard Mode
+                  </div>
+                  <div>
+                    <small>
+                      Any revealed hints must be used in subsequent guesses
+                    </small>
+                  </div>
+                </div>
+                <div className="form-check form-switch">
+                  <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"/>
+                </div>
+              </div>
+
+              <div className="settings-options">
+                <div className="settings-options-texts">
+                  <div>
+                    Dark Theme
+                  </div>
+                  <div>
+                   
+                  </div>
+                </div>
+                <div className="form-check form-switch">
+                  <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"/>
+                </div>
+              </div>
+
+              <div className="settings-options">
+                <div className="settings-options-texts">
+                  <div>
+                    High Contrast Mode
+                  </div>
+                  <div>
+                    <small>
+                      For improved color vision
+                    </small>
+                  </div>
+                </div>
+                <div className="form-check form-switch">
+                  <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"/>
+                </div>
+              </div>
+
+              <div className="settings-options">
+                <div className="settings-options-texts">
+                  <div>
+                    Feedback
+                  </div>
+                </div>
+                <div className="settings-options-side">
+                    Email
+                </div>
+              </div>
+
+              <div className="settings-options">
+                <div className="settings-options-texts">
+                  <div>
+                    Community
+
+                  </div>
+                </div>
+                <div className="settings-options-side">
+                    Twitter
+                </div>
+              </div>
+
+              <div className="settings-options">
+                <div className="settings-options-texts">
+                  <div>
+                    Questions?
+                  </div>
+                </div>
+                <div className="settings-options-side">
+                    FAQ
+                </div>
+              </div>
+              <div>
+                <small>
+                Made with ❤️ | Website developed by S Subodh
+                </small>
+              </div>
+              
+
+            </div>
           </div>
         </div>
       </div>

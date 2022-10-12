@@ -51,6 +51,8 @@ body{
  cursor: pointer;
  color: var(--app-color);
  background-color: var(--bg-black-color);
+ /* border-color: var(--bg-black-color); */
+ border:0;
 }
 .navbar-brand{
   margin-left: 8%;
@@ -86,7 +88,7 @@ body{
     padding: 10px;
     box-sizing: border-box;
 }
-.Board-module-board .board-row{
+.board-row{
   /* gap:5px;
   margin-top: 5px; */
     display: grid;
@@ -94,7 +96,7 @@ body{
     grid-gap: 5px;
 
 }
-.Board-module-board .cube{
+.cube{
   /* background-color: var(--bg-black-color);
   width: 100%;
   display: inline-flex;
@@ -189,15 +191,15 @@ body{
   flex: 0.5;
 }
 
-#settings-modal .modal-content{
+.modal-content{
   background-color: var(--bg-black-color);
 }
 
-#settings-modal .modal-header{
+.modal-header{
   border-bottom: none;
 }
 
-#settings-modal .modal-body{
+.modal-body{
   display: flex;
   flex-direction: column;
 }
@@ -222,9 +224,61 @@ body{
 }
 small{
   font-size: 0.7em;
+  color: var(--color-tone-2);
 }
 
+.how-options{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: start;
+  border-bottom: 1px solid var(--color-tone-4);
+  font-family: serif;
+}
+.how-options h3{
+  font-weight: 800;
+  font-family: sans-serif;
+}
+.how-options h5{
+  font-weight: unset;
+}
+.how-footer{
+  text-align: start;
+  margin-top: 1em;
+}
+.how-footer a{
+  text-decoration: none;
+}
+.examples{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: start;
+}
 
+.exm{
+    line-height: 1;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    font-size: 1.4rem;
+    text-align: center;
+    line-height: normal;
+}
+
+.how-row{
+  display: flex;
+  grid-gap: 5px;
+}
+.correct{
+  background-color: var(--color-correct);
+}
+.present{
+  background-color: var(--color-present);
+}
+.absent{
+  background-color: var(--color-absent);
+}
 
 /* #settings-modal .modal-footer{
   justify-content: center;
