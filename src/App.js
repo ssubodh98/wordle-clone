@@ -5,6 +5,8 @@ import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { BsBackspace } from "react-icons/bs"
 import { AiOutlineEnter } from "react-icons/ai";
 // import { AiOutlineClose } from "react-icons/ai";
+import { GiBee } from "react-icons/gi";
+import { GiShare } from "react-icons/gi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -117,7 +119,7 @@ function App() {
                 <button className="side-buttons-icons" type="button" data-bs-toggle="modal" data-bs-target="#how-modal">
                   <BsFillQuestionCircleFill size={30}/>
                 </button>
-                <button className="side-buttons-icons px-3" type="button" data-bs-toggle="modal" data-bs-target="#statitics-modal">
+                <button className="side-buttons-icons px-3" type="button" data-bs-toggle="modal" data-bs-target="#statistics-modal">
                   <BsBarChartLineFill size={30}/>
                 </button>
                 <button className="side-buttons-icons" type="button" data-bs-toggle="modal" data-bs-target="#settings-modal">
@@ -270,7 +272,7 @@ function App() {
       <div className="modal" id="how-modal" tabIndex="-3" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-scrollable">
           <div className="modal-content">
-            <div className="modal-header">
+            <div className="modal-header pb-0">
               <div className="flex-div"></div>
               <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -318,15 +320,7 @@ function App() {
                   <div>U is not in the word in any spot.</div>
                 </div>
               
-                 
-                
-             
-               
-                
               </div>
-              
-
-            
 
               <div>
                 <div className="how-footer">
@@ -337,112 +331,79 @@ function App() {
                 </div>
               </div>
 
-              
-
-
-              
-
             </div>
           </div>
         </div>
       </div>
 
-      {/* Statitics Modal */}
-      <div className="modal" id="statitics-modal" tabIndex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      {/* Statistics Modal */}
+      <div className="modal" id="statistics-modal" tabIndex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-scrollable">
           <div className="modal-content">
-            <div className="modal-header">
+            <div className="modal-header pb-0">
               <div className="flex-div"></div>
-              <h5 className="modal-title" id="exampleModalLabel">SETTINGS</h5>
+              
               <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-              {/* <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close">
-                <AiOutlineClose/>
-              </button> */}
             </div>
-            <div className="modal-body">
-              <div className="settings-options">
-                <div className="settings-options-texts">
-                  <div>
-                    Hard Mode
-                  </div>
-                  <div>
-                    <small>
-                      Any revealed hints must be used in subsequent guesses
-                    </small>
-                  </div>
-                </div>
-                <div className="form-check form-switch">
-                  <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"/>
-                </div>
-              </div>
+            <div className="modal-body pt-0">
+              <div className="statistics-options">
 
-              <div className="settings-options">
-                <div className="settings-options-texts">
-                  <div>
-                    Dark Theme
-                  </div>
-                  <div>
-                   
-                  </div>
+                <div>
+                  <h5 className="modal-title" id="exampleModalLabel">STATISTICS</h5>
                 </div>
-                <div className="form-check form-switch">
-                  <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"/>
-                </div>
-              </div>
+                <div className="stats-boxes">
+                  <div className="stats-box">
+                    <div className="stats-num">
+                      1
+                    </div>
+                    <div className="stats-text">
+                      Played
+                    </div>
+                  </div>
 
-              <div className="settings-options">
-                <div className="settings-options-texts">
-                  <div>
-                    High Contrast Mode
+                  <div className="stats-box">
+                    <div className="stats-num">
+                      100
+                    </div>
+                    <div className="stats-text">
+                      Win %
+                    </div>
                   </div>
-                  <div>
-                    <small>
-                      For improved color vision
-                    </small>
-                  </div>
-                </div>
-                <div className="form-check form-switch">
-                  <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"/>
-                </div>
-              </div>
 
-              <div className="settings-options">
-                <div className="settings-options-texts">
-                  <div>
-                    Feedback
+                  <div className="stats-box">
+                    <div className="stats-num">
+                      1
+                    </div>
+                    <div className="stats-text">
+                      Current Streak
+                    </div>
                   </div>
-                </div>
-                <div className="settings-options-side">
-                    Email
-                </div>
-              </div>
 
-              <div className="settings-options">
-                <div className="settings-options-texts">
-                  <div>
-                    Community
-
+                  <div className="stats-box">
+                    <div className="stats-num">
+                      1
+                    </div>
+                    <div className="stats-text">
+                      Max Streak
+                    </div>
                   </div>
-                </div>
-                <div className="settings-options-side">
-                    Twitter
-                </div>
-              </div>
 
-              <div className="settings-options">
-                <div className="settings-options-texts">
-                  <div>
-                    Questions?
-                  </div>
                 </div>
-                <div className="settings-options-side">
-                    FAQ
+
+                <div className="mt-2">
+                  <h6 className="modal-title" id="exampleModalLabel">GUESS DISTRIBUTION</h6>
+                  
                 </div>
+
               </div>
-              <div>
-                <small>
-                Made with ❤️ | Website developed by S Subodh
-                </small>
+              
+              <div className="mt-1">
+                NEXT WORDLE IN 22:13:04
+              </div>
+              <div className="mt-1 stats-footer">
+                    <button class="btn btn-primary black spellingBeeYellow" type="button">Play Spelling Bee <GiBee/></button>
+                    <button class="btn btn-primary btn-rounded correct" type="button">Share <GiShare/></button>
+                  
               </div>
               
 
