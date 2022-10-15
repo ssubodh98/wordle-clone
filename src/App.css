@@ -314,19 +314,29 @@ small{
   width: 100%;
   justify-content: space-between;
 }
-.stats-footer .btn{
+.stats-footer .button{
   border-radius: 105px;
   width: calc(50% - 5px);
   line-height: 25px;
-  
+  border-width: 0;
   font-size: 14px;
   font-weight: 600;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.stats-footer .share:focus{
+  background-color: var(--color-correct);
 }
 
 .spellingBeeYellow{
   background-color: var(--spellingBeeYellow);
   color: black;
 }
-
+.spellingBeeYellow:focus{
+  background-color: var(--spellingBeeYellow);
+}
+#statistics-modal .modal-title{
+  letter-spacing: 0.05em;
+}
 
 

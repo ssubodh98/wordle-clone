@@ -15,6 +15,18 @@ function App() {
   let CurBox=0;
   let CurRow=1;
   let guessword="APPLE";//temp
+  var colorMap = new Map();
+
+  // document.getElementById('A').focus();
+
+  function handleKeyDown(){
+    // useEffect(() => {
+    //   window.addEventListener('keypress', e => {
+    //     console.log(e.key)
+    //   });
+    // }, []);
+    console.log("*******");
+  }
 
   function buttonclicked(e) {
     if(CurBox<5){
@@ -31,6 +43,30 @@ function App() {
       //document.getElementById("fir").innerHTML=e.target.value;
       CurBox++;
     }
+  }
+
+  function changeKeyColor(key, color) {
+    console.log("Key, Color",key, ", "+ color);
+    var r = document.querySelector(':root');
+    var rs = getComputedStyle(r);
+    const keyDiv=document.getElementById(key);
+    console.log("keyDiv",keyDiv.style.backgroundColor);
+    
+    
+
+    if(colorMap.has(key)){
+      if(color==='--color-correct'){
+        colorMap.set(key,color);
+        console.log("map",colorMap);
+        keyDiv.style.backgroundColor=rs.getPropertyValue(color);
+      }
+    }else{
+      colorMap.set(key,color);
+      console.log("map",colorMap);
+      keyDiv.style.backgroundColor=rs.getPropertyValue(color);
+    }
+
+    
   }
 
   function submitclicked() {
@@ -58,6 +94,7 @@ function App() {
       }
 
       let tempGuess=guessword;
+      let temptype=typeWord;
       var r = document.querySelector(':root');
       var rs = getComputedStyle(r);
       for(let i=0;i<5;i++){
@@ -67,28 +104,64 @@ function App() {
           tempGuess = tempGuess.split('');
           tempGuess[i] = ' ';
           tempGuess = tempGuess.join('');
-          console.log("tempGuess",tempGuess);
-        }else if(tempGuess.indexOf(typeWord.charAt(i))>-1){
-          allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-present');
-        }else{
-          allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-absent');
+          temptype = temptype.split('');
+          temptype[i] = ' ';
+          temptype = temptype.join('');
+          console.log("m tempGuess",tempGuess);
+          console.log("m temptype:",temptype);
+          changeKeyColor(typeWord.charAt(i), "--color-correct");
         }
         
       }
+      for(let i=0;i<5;i++){
+        
+        if(temptype.charAt(i)!==' ') {
+          if(tempGuess.indexOf(typeWord.charAt(i))>-1){
+            let indx=tempGuess.indexOf(typeWord.charAt(i));
+            allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-present');
+            tempGuess = tempGuess.split('');
+            tempGuess[indx] = ' ';
+            tempGuess = tempGuess.join('');
+            temptype = temptype.split('');
+            temptype[i] = ' ';
+            temptype = temptype.join('');
+            changeKeyColor(typeWord.charAt(i), "--color-present");
+          }else{
+            
+              temptype = temptype.split('');
+              temptype[i] = '-';
+              temptype = temptype.join('');
+             
+            
+          }
+          console.log("tempGuess:",tempGuess);
+          console.log("temptype:",temptype);
+        }
+      }
+      for(let i=0;i<5;i++){
+        if(temptype.charAt(i)==='-'){
+          changeKeyColor(typeWord.charAt(i), "--color-absent");
+          allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-absent');
+        }
+      }
+
+      CurBox=0;
+      CurRow=CurRow+1;
       
     }
-    CurBox=0;
-    CurRow=CurRow+1;
+    
   }
   
   function delclicked() {
     // let typeWord=getTypedWord();
     // console.log(typeWord.substring(0,CurBox-1));
-    const allWithClass = Array.from(
-      document.getElementsByClassName('line'+CurRow)
-    );
-    allWithClass[CurBox-1].innerHTML="";
-    CurBox--;
+    if(CurBox>0){
+      const allWithClass = Array.from(
+        document.getElementsByClassName('line'+CurRow)
+      );
+      allWithClass[CurBox-1].innerHTML="";
+      CurBox--;
+    }    
   }
 
   function getTypedWord() {
@@ -105,7 +178,7 @@ function App() {
 
   return (
     
-    <div className="App">
+    <div className="App" onKeyPress={(e: KeyboardEvent<HTMLDivElement>) => console.log(e.key)}>
       
       <div className="game-header">
         {/* <header> */}
@@ -156,6 +229,7 @@ function App() {
           </nav> 
 
       </div>
+
       {/* Settings Modal */}
       <div className="modal" id="settings-modal" tabIndex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-scrollable">
@@ -390,9 +464,15 @@ function App() {
 
                 </div>
 
-                <div className="mt-2">
+                <div className="mt-2 mb-1">
                   <h6 className="modal-title" id="exampleModalLabel">GUESS DISTRIBUTION</h6>
-                  
+                  <div className="noData">
+                    <p className="text-center">No Data</p>  
+                  </div>
+                  <div>
+
+                  </div>
+                                    
                 </div>
 
               </div>
@@ -401,8 +481,8 @@ function App() {
                 NEXT WORDLE IN 22:13:04
               </div>
               <div className="mt-1 stats-footer">
-                    <button class="btn btn-primary black spellingBeeYellow" type="button">Play Spelling Bee <GiBee/></button>
-                    <button class="btn btn-primary btn-rounded correct" type="button">Share <GiShare/></button>
+                    <button className="button spellingBeeYellow" type="button">Play Spelling Bee <GiBee/></button>
+                    <button className="button share correct" type="button">Share <GiShare/></button>
                   
               </div>
               
@@ -464,39 +544,39 @@ function App() {
           <div className="Keyboard-module">
             <div id="keyboard-cont">
                 <div className="first-row">
-                    <button className="keyboard-button" value="Q"  onClick={buttonclicked}>q</button>
-                    <button className="keyboard-button" value="W"  onClick={buttonclicked}>w</button>
-                    <button className="keyboard-button" value="E"  onClick={buttonclicked}>e</button>
-                    <button className="keyboard-button" value="R"  onClick={buttonclicked}>r</button>
-                    <button className="keyboard-button" value="T"  onClick={buttonclicked}>t</button>
-                    <button className="keyboard-button" value="Y"  onClick={buttonclicked}>y</button>
-                    <button className="keyboard-button" value="U"  onClick={buttonclicked}>u</button>
-                    <button className="keyboard-button" value="I"  onClick={buttonclicked}>i</button>
-                    <button className="keyboard-button" value="O"  onClick={buttonclicked}>o</button>
-                    <button className="keyboard-button" value="P"  onClick={buttonclicked}>p</button>
+                    <button className="keyboard-button" value="Q" id="Q"  onClick={buttonclicked}>q</button>
+                    <button className="keyboard-button" value="W" id="W"  onClick={buttonclicked}>w</button>
+                    <button className="keyboard-button" value="E" id="E"  onClick={buttonclicked}>e</button>
+                    <button className="keyboard-button" value="R" id="R"  onClick={buttonclicked}>r</button>
+                    <button className="keyboard-button" value="T" id="T"  onClick={buttonclicked}>t</button>
+                    <button className="keyboard-button" value="Y" id="Y"  onClick={buttonclicked}>y</button>
+                    <button className="keyboard-button" value="U" id="U"  onClick={buttonclicked}>u</button>
+                    <button className="keyboard-button" value="I" id="I"  onClick={buttonclicked}>i</button>
+                    <button className="keyboard-button" value="O" id="O"  onClick={buttonclicked}>o</button>
+                    <button className="keyboard-button" value="P" id="P"  onClick={buttonclicked}>p</button>
                   </div>
                 <div className="second-row">
                   <div className="flex-div"></div>
-                  <button className="keyboard-button" value="A" onClick={buttonclicked}>a</button>
-                  <button className="keyboard-button" value="S" onClick={buttonclicked}>s</button>
-                  <button className="keyboard-button" value="D" onClick={buttonclicked}>d</button>
-                  <button className="keyboard-button" value="F" onClick={buttonclicked}>f</button>
-                  <button className="keyboard-button" value="G" onClick={buttonclicked}>g</button>
-                  <button className="keyboard-button" value="H" onClick={buttonclicked}>h</button>
-                  <button className="keyboard-button" value="J" onClick={buttonclicked}>j</button>
-                  <button className="keyboard-button" value="K" onClick={buttonclicked}>k</button>
-                  <button className="keyboard-button" value="L" onClick={buttonclicked}>l</button>
+                  <button className="keyboard-button" value="A" id="A" onClick={buttonclicked}>a</button>
+                  <button className="keyboard-button" value="S" id="S" onClick={buttonclicked}>s</button>
+                  <button className="keyboard-button" value="D" id="D" onClick={buttonclicked}>d</button>
+                  <button className="keyboard-button" value="F" id="F" onClick={buttonclicked}>f</button>
+                  <button className="keyboard-button" value="G" id="G" onClick={buttonclicked}>g</button>
+                  <button className="keyboard-button" value="H" id="H" onClick={buttonclicked}>h</button>
+                  <button className="keyboard-button" value="J" id="J" onClick={buttonclicked}>j</button>
+                  <button className="keyboard-button" value="K" id="K" onClick={buttonclicked}>k</button>
+                  <button className="keyboard-button" value="L" id="L" onClick={buttonclicked}>l</button>
                   <div className="flex-div"></div>
                 </div>
               <div className="third-row">
                   <button className="keyboard-button" value="Enter" onClick={submitclicked}><AiOutlineEnter/></button>
-                  <button className="keyboard-button" value="Z" onClick={buttonclicked}>z</button>
-                  <button className="keyboard-button" value="X" onClick={buttonclicked}>x</button>
-                  <button className="keyboard-button" value="C" onClick={buttonclicked}>c</button>
-                  <button className="keyboard-button" value="V" onClick={buttonclicked}>v</button>
-                  <button className="keyboard-button" value="B" onClick={buttonclicked}>b</button>
-                  <button className="keyboard-button" value="N" onClick={buttonclicked}>n</button>
-                  <button className="keyboard-button" value="M" onClick={buttonclicked}>m</button>
+                  <button className="keyboard-button" value="Z" id="Z" onClick={buttonclicked}>z</button>
+                  <button className="keyboard-button" value="X" id="X" onClick={buttonclicked}>x</button>
+                  <button className="keyboard-button" value="C" id="C" onClick={buttonclicked}>c</button>
+                  <button className="keyboard-button" value="V" id="V" onClick={buttonclicked}>v</button>
+                  <button className="keyboard-button" value="B" id="B" onClick={buttonclicked}>b</button>
+                  <button className="keyboard-button" value="N" id="N" onClick={buttonclicked}>n</button>
+                  <button className="keyboard-button" value="M" id="M" onClick={buttonclicked}>m</button>
                   <button className="keyboard-button" value="Del" onClick={delclicked}><BsBackspace/></button>
               </div>
             </div>
