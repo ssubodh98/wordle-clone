@@ -7,178 +7,17 @@ import { AiOutlineEnter } from "react-icons/ai";
 // import { AiOutlineClose } from "react-icons/ai";
 import { GiBee } from "react-icons/gi";
 import { GiShare } from "react-icons/gi";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import * as myfn from './AppFunctions.js';
 
 
 function App() {
-  let CurBox=0;
-  let CurRow=1;
-  let guessword="APPLE";//temp
-  var colorMap = new Map();
-
-  // document.getElementById('A').focus();
-
-  function handleKeyDown(){
-    // useEffect(() => {
-    //   window.addEventListener('keypress', e => {
-    //     console.log(e.key)
-    //   });
-    // }, []);
-    console.log("*******");
-  }
-
-  function buttonclicked(e) {
-    if(CurBox<5){
-      console.log(CurRow);
-      const allWithClass = Array.from(
-        document.getElementsByClassName('line'+CurRow)
-      );
-
-      allWithClass[CurBox].innerHTML=e.target.value;
-      // var r = document.querySelector(':root');
-      // var rs = getComputedStyle(r);
-      // allWithClass[CurBox].style.backgroundColor = rs.getPropertyValue('--key-bg');
-      // console.log(allWithClass[0].value);
-      //document.getElementById("fir").innerHTML=e.target.value;
-      CurBox++;
-    }
-  }
-
-  function changeKeyColor(key, color) {
-    console.log("Key, Color",key, ", "+ color);
-    var r = document.querySelector(':root');
-    var rs = getComputedStyle(r);
-    const keyDiv=document.getElementById(key);
-    console.log("keyDiv",keyDiv.style.backgroundColor);
-    
-    
-
-    if(colorMap.has(key)){
-      if(color==='--color-correct'){
-        colorMap.set(key,color);
-        console.log("map",colorMap);
-        keyDiv.style.backgroundColor=rs.getPropertyValue(color);
-      }
-    }else{
-      colorMap.set(key,color);
-      console.log("map",colorMap);
-      keyDiv.style.backgroundColor=rs.getPropertyValue(color);
-    }
-
-    
-  }
-
-  function submitclicked() {
-    let typeWord=getTypedWord();
-    const allWithClass = Array.from(
-      document.getElementsByClassName('line'+CurRow)
-    );
-
-    if(CurBox<5){
-      toast.warn('Not Enough Letters!', {
-        position: "top-center",
-        autoClose: 400,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        });
-    }else{
-      console.log(typeWord);
-      if(typeWord===guessword){
-        console.log("correct");
-      }else{
-        console.log("wrong");
-      }
-
-      let tempGuess=guessword;
-      let temptype=typeWord;
-      var r = document.querySelector(':root');
-      var rs = getComputedStyle(r);
-      for(let i=0;i<5;i++){
-        if(typeWord.charAt(i)===guessword.charAt(i)){
-          allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-correct');
-          //tempGuess.charAt(i)=" ";
-          tempGuess = tempGuess.split('');
-          tempGuess[i] = ' ';
-          tempGuess = tempGuess.join('');
-          temptype = temptype.split('');
-          temptype[i] = ' ';
-          temptype = temptype.join('');
-          console.log("m tempGuess",tempGuess);
-          console.log("m temptype:",temptype);
-          changeKeyColor(typeWord.charAt(i), "--color-correct");
-        }
-        
-      }
-      for(let i=0;i<5;i++){
-        
-        if(temptype.charAt(i)!==' ') {
-          if(tempGuess.indexOf(typeWord.charAt(i))>-1){
-            let indx=tempGuess.indexOf(typeWord.charAt(i));
-            allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-present');
-            tempGuess = tempGuess.split('');
-            tempGuess[indx] = ' ';
-            tempGuess = tempGuess.join('');
-            temptype = temptype.split('');
-            temptype[i] = ' ';
-            temptype = temptype.join('');
-            changeKeyColor(typeWord.charAt(i), "--color-present");
-          }else{
-            
-              temptype = temptype.split('');
-              temptype[i] = '-';
-              temptype = temptype.join('');
-             
-            
-          }
-          console.log("tempGuess:",tempGuess);
-          console.log("temptype:",temptype);
-        }
-      }
-      for(let i=0;i<5;i++){
-        if(temptype.charAt(i)==='-'){
-          changeKeyColor(typeWord.charAt(i), "--color-absent");
-          allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-absent');
-        }
-      }
-
-      CurBox=0;
-      CurRow=CurRow+1;
-      
-    }
-    
-  }
   
-  function delclicked() {
-    // let typeWord=getTypedWord();
-    // console.log(typeWord.substring(0,CurBox-1));
-    if(CurBox>0){
-      const allWithClass = Array.from(
-        document.getElementsByClassName('line'+CurRow)
-      );
-      allWithClass[CurBox-1].innerHTML="";
-      CurBox--;
-    }    
-  }
-
-  function getTypedWord() {
-    let typeWord="";
-    const allWithClass = Array.from(
-      document.getElementsByClassName('line'+CurRow)
-    );
-    for(let i=0;i<CurBox;i++){
-      typeWord+=allWithClass[i].innerHTML;
-    }
-    //console.log(typeWord);
-    return typeWord;
-  }
 
   return (
     
-    <div className="App" onKeyPress={(e: KeyboardEvent<HTMLDivElement>) => console.log(e.key)}>
+    <div className="App" tabIndex="0" onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => myfn.handleKeyDown(e.key)}>
       
       <div className="game-header">
         {/* <header> */}
@@ -544,40 +383,40 @@ function App() {
           <div className="Keyboard-module">
             <div id="keyboard-cont">
                 <div className="first-row">
-                    <button className="keyboard-button" value="Q" id="Q"  onClick={buttonclicked}>q</button>
-                    <button className="keyboard-button" value="W" id="W"  onClick={buttonclicked}>w</button>
-                    <button className="keyboard-button" value="E" id="E"  onClick={buttonclicked}>e</button>
-                    <button className="keyboard-button" value="R" id="R"  onClick={buttonclicked}>r</button>
-                    <button className="keyboard-button" value="T" id="T"  onClick={buttonclicked}>t</button>
-                    <button className="keyboard-button" value="Y" id="Y"  onClick={buttonclicked}>y</button>
-                    <button className="keyboard-button" value="U" id="U"  onClick={buttonclicked}>u</button>
-                    <button className="keyboard-button" value="I" id="I"  onClick={buttonclicked}>i</button>
-                    <button className="keyboard-button" value="O" id="O"  onClick={buttonclicked}>o</button>
-                    <button className="keyboard-button" value="P" id="P"  onClick={buttonclicked}>p</button>
+                    <button className="keyboard-button" value="Q" id="Q"  onClick={myfn.buttonclicked}>q</button>
+                    <button className="keyboard-button" value="W" id="W"  onClick={myfn.buttonclicked}>w</button>
+                    <button className="keyboard-button" value="E" id="E"  onClick={myfn.buttonclicked}>e</button>
+                    <button className="keyboard-button" value="R" id="R"  onClick={myfn.buttonclicked}>r</button>
+                    <button className="keyboard-button" value="T" id="T"  onClick={myfn.buttonclicked}>t</button>
+                    <button className="keyboard-button" value="Y" id="Y"  onClick={myfn.buttonclicked}>y</button>
+                    <button className="keyboard-button" value="U" id="U"  onClick={myfn.buttonclicked}>u</button>
+                    <button className="keyboard-button" value="I" id="I"  onClick={myfn.buttonclicked}>i</button>
+                    <button className="keyboard-button" value="O" id="O"  onClick={myfn.buttonclicked}>o</button>
+                    <button className="keyboard-button" value="P" id="P"  onClick={myfn.buttonclicked}>p</button>
                   </div>
                 <div className="second-row">
                   <div className="flex-div"></div>
-                  <button className="keyboard-button" value="A" id="A" onClick={buttonclicked}>a</button>
-                  <button className="keyboard-button" value="S" id="S" onClick={buttonclicked}>s</button>
-                  <button className="keyboard-button" value="D" id="D" onClick={buttonclicked}>d</button>
-                  <button className="keyboard-button" value="F" id="F" onClick={buttonclicked}>f</button>
-                  <button className="keyboard-button" value="G" id="G" onClick={buttonclicked}>g</button>
-                  <button className="keyboard-button" value="H" id="H" onClick={buttonclicked}>h</button>
-                  <button className="keyboard-button" value="J" id="J" onClick={buttonclicked}>j</button>
-                  <button className="keyboard-button" value="K" id="K" onClick={buttonclicked}>k</button>
-                  <button className="keyboard-button" value="L" id="L" onClick={buttonclicked}>l</button>
+                  <button className="keyboard-button" value="A" id="A" onClick={myfn.buttonclicked}>a</button>
+                  <button className="keyboard-button" value="S" id="S" onClick={myfn.buttonclicked}>s</button>
+                  <button className="keyboard-button" value="D" id="D" onClick={myfn.buttonclicked}>d</button>
+                  <button className="keyboard-button" value="F" id="F" onClick={myfn.buttonclicked}>f</button>
+                  <button className="keyboard-button" value="G" id="G" onClick={myfn.buttonclicked}>g</button>
+                  <button className="keyboard-button" value="H" id="H" onClick={myfn.buttonclicked}>h</button>
+                  <button className="keyboard-button" value="J" id="J" onClick={myfn.buttonclicked}>j</button>
+                  <button className="keyboard-button" value="K" id="K" onClick={myfn.buttonclicked}>k</button>
+                  <button className="keyboard-button" value="L" id="L" onClick={myfn.buttonclicked}>l</button>
                   <div className="flex-div"></div>
                 </div>
               <div className="third-row">
-                  <button className="keyboard-button" value="Enter" onClick={submitclicked}><AiOutlineEnter/></button>
-                  <button className="keyboard-button" value="Z" id="Z" onClick={buttonclicked}>z</button>
-                  <button className="keyboard-button" value="X" id="X" onClick={buttonclicked}>x</button>
-                  <button className="keyboard-button" value="C" id="C" onClick={buttonclicked}>c</button>
-                  <button className="keyboard-button" value="V" id="V" onClick={buttonclicked}>v</button>
-                  <button className="keyboard-button" value="B" id="B" onClick={buttonclicked}>b</button>
-                  <button className="keyboard-button" value="N" id="N" onClick={buttonclicked}>n</button>
-                  <button className="keyboard-button" value="M" id="M" onClick={buttonclicked}>m</button>
-                  <button className="keyboard-button" value="Del" onClick={delclicked}><BsBackspace/></button>
+                  <button className="keyboard-button" value="Enter" onClick={myfn.submitclicked}><AiOutlineEnter/></button>
+                  <button className="keyboard-button" value="Z" id="Z" onClick={myfn.buttonclicked}>z</button>
+                  <button className="keyboard-button" value="X" id="X" onClick={myfn.buttonclicked}>x</button>
+                  <button className="keyboard-button" value="C" id="C" onClick={myfn.buttonclicked}>c</button>
+                  <button className="keyboard-button" value="V" id="V" onClick={myfn.buttonclicked}>v</button>
+                  <button className="keyboard-button" value="B" id="B" onClick={myfn.buttonclicked}>b</button>
+                  <button className="keyboard-button" value="N" id="N" onClick={myfn.buttonclicked}>n</button>
+                  <button className="keyboard-button" value="M" id="M" onClick={myfn.buttonclicked}>m</button>
+                  <button className="keyboard-button" value="Del" onClick={myfn.delclicked}><BsBackspace/></button>
               </div>
             </div>
           </div>
