@@ -63,6 +63,11 @@ import { toast } from 'react-toastify';
   export function changeKeyColor(key, color) {
     console.log("Key, Color",key, ", "+ color);
     var r = document.querySelector(':root');
+    var theme=document.documentElement.getAttribute("data-theme");
+    if(theme==='dark'){
+        r= document.querySelector('[data-theme=dark]');
+    }
+    
     var rs = getComputedStyle(r);
     const keyDiv=document.getElementById(key);
     console.log("keyDiv",keyDiv.style.backgroundColor);
@@ -111,6 +116,10 @@ import { toast } from 'react-toastify';
       let tempGuess=guessword;
       let temptype=typeWord;
       var r = document.querySelector(':root');
+        var theme=document.documentElement.getAttribute("data-theme");
+        if(theme==='dark'){
+            r= document.querySelector('[data-theme=dark]');
+        }
       var rs = getComputedStyle(r);
       for(let i=0;i<5;i++){
         if(typeWord.charAt(i)===guessword.charAt(i)){
@@ -190,3 +199,36 @@ import { toast } from 'react-toastify';
     //console.log(typeWord);
     return typeWord;
   }
+
+  export function themeButton() {
+    const theme=sessionStorage.getItem("theme");
+    if(theme==="dark"){
+        sessionStorage.setItem("theme", "light");
+        document.documentElement.setAttribute("data-theme", "light");
+    }else{
+        sessionStorage.setItem("theme", "dark");
+        document.documentElement.setAttribute("data-theme", "dark");
+    }   
+    
+
+    
+  }
+
+  export function colorBlindButton() {
+    const colorBlind=sessionStorage.getItem("color-blind");
+    if(colorBlind==="no"){
+        sessionStorage.setItem("color-blind", "yes");
+        document.documentElement.setAttribute("color-blind", "yes");
+        // var r = document.querySelector(':root');
+        // var rs = getComputedStyle(r);
+        // rs.setProperty('--color-correct', ' #f5793a');
+        let root = document.documentElement;
+        root.style.setProperty('--color-correct', ' #f5793a');
+    }else{
+        sessionStorage.setItem("color-blind", "no");
+        document.documentElement.setAttribute("color-blind", "no");
+    }   
+    
+  }
+
+  

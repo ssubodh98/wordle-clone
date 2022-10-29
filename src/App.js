@@ -4,16 +4,20 @@ import { BsBarChartLineFill } from "react-icons/bs";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { BsBackspace } from "react-icons/bs"
 import { AiOutlineEnter } from "react-icons/ai";
-// import { AiOutlineClose } from "react-icons/ai";
+ import { AiOutlineClose } from "react-icons/ai";
 import { GiBee } from "react-icons/gi";
 import { GiShare } from "react-icons/gi";
+import { GoThreeBars } from "react-icons/go";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as myfn from './AppFunctions.js';
 
 
 function App() {
-  
+  document.documentElement.setAttribute("data-theme", "light");
+  sessionStorage.setItem("theme", "light");
+  document.documentElement.setAttribute("color-blind", "no");
+  sessionStorage.setItem("color-blind", "no");
 
   return (
     
@@ -21,10 +25,11 @@ function App() {
       
       <div className="game-header">
         {/* <header> */}
-          <nav className="navbar navbar-dark fixed-top">
+          <nav className="navbar navbar-light fixed-top">
             <div className="container-fluid">
               <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-                <span className="navbar-toggler-icon"></span>
+                {/* <span className="navbar-toggler-icon"></span> */}
+                <GoThreeBars/>
               </button>
               <a className="navbar-brand" href="#">Wordle</a>
               <div className="side-buttons">
@@ -38,10 +43,12 @@ function App() {
                   <AiFillSetting size={30}/>
                 </button>
               </div>
-              <div className="offcanvas offcanvas-start text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+              <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                 <div className="offcanvas-header">
                   <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">Games</h5>
-                  <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  <button type="button" className="dismiss-button" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <AiOutlineClose/>
+                  </button>
                 </div>
                 <div className="offcanvas-body">
                   <ul className="navbar-nav justify-content-start flex-grow-1 pe-3">
@@ -76,7 +83,8 @@ function App() {
             <div className="modal-header">
               <div className="flex-div"></div>
               <h5 className="modal-title" id="exampleModalLabel">SETTINGS</h5>
-              <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div className="flex-div"></div>
+              <button type="button" className="dismiss-button" data-bs-dismiss="modal" aria-label="Close"><AiOutlineClose/></button>
               {/* <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close">
                 <AiOutlineClose/>
               </button> */}
@@ -108,7 +116,7 @@ function App() {
                   </div>
                 </div>
                 <div className="form-check form-switch">
-                  <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"/>
+                  <input className="form-check-input" type="checkbox" onClick={myfn.themeButton} id="flexSwitchCheckDefault"/>
                 </div>
               </div>
 
@@ -124,7 +132,7 @@ function App() {
                   </div>
                 </div>
                 <div className="form-check form-switch">
-                  <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"/>
+                  <input className="form-check-input" type="checkbox" onClick={myfn.colorBlindButton} id="flexSwitchCheckDefault"/>
                 </div>
               </div>
 
@@ -187,7 +195,9 @@ function App() {
           <div className="modal-content">
             <div className="modal-header pb-0">
               <div className="flex-div"></div>
-              <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" className="dismiss-button" data-bs-dismiss="modal" aria-label="Close">
+                <AiOutlineClose/>
+              </button>
             </div>
             <div className="modal-body">
               <div className="how-options">
@@ -256,7 +266,7 @@ function App() {
             <div className="modal-header pb-0">
               <div className="flex-div"></div>
               
-              <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" className="dismiss-button" data-bs-dismiss="modal" aria-label="Close"><AiOutlineClose/></button>
             </div>
             <div className="modal-body pt-0">
               <div className="statistics-options">

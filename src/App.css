@@ -23,15 +23,33 @@ body{
 .App .game-header{
   height: 65px;
 }
+
+.App .offcanvas{
+  background-color: var(--bg-black-color);
+  color: var(--app-color);
+}
+/* .App .offcanvas-body a{
+  color: var(--app-color);
+} */
+.App .nav-link{
+  color: var(--navbar-color);
+}
+.App .nav-link.active{
+  color: var(--navbar-active-color);
+}
+
 .App .offcanvas-body li:hover{
-  background-color: #2f2f31;
+  background-color: var(--hover-color);
 }
 
 .App .navbar{
   background-color: var(--bg-black-color);
-  border-bottom: 1px solid #3a3a3c;
+  border-bottom: 1px solid var(--cube-border);
   padding: 0;
   height: 65px;
+}
+.App .navbar-toggler{
+  color: var(--app-color);
 }
 
 .App .navbar-brand{
@@ -39,11 +57,20 @@ body{
   font-weight: 700;
   letter-spacing: 0.01em;
   padding: 0;
+  color: var(--app-color);
 }
 @media (max-width: 992px) {
   .App .navbar-brand{
     font-size: 28px;
   }
+}
+
+.dismiss-button{
+  border: 0;
+  font-size: 1.2em;
+  background-color: var(--modal-content-bg);
+  color: var(--app-color);
+  border-color: var(--modal-content-bg);
 }
 
 .side-buttons .side-buttons-icons{
@@ -107,11 +134,11 @@ body{
   align-items: center;
   font-weight: bold;
   box-sizing: border-box;
-  border: 2px solid #3a3a3c;
+  border: 2px solid var(--cube-border);
   vertical-align: middle;
   width: 100%; */
   background-color: var(--bg-black-color);
-  border: 2px solid #3a3a3c;
+  border: 2px solid var(--cube-border);
   width: 100%;
     display: inline-flex;
     justify-content: center;
@@ -161,7 +188,7 @@ body{
   font-weight: bold;
   border: 0;
   padding: 0;
-  margin: 0 6px 0 0;
+  margin: 0 3px 0 3px;
   height: 58px;
   border-radius: 4px;
   cursor: pointer;
@@ -339,4 +366,6 @@ small{
   letter-spacing: 0.05em;
 }
 
+.color-blind{
 
+}
