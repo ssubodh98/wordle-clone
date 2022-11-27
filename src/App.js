@@ -67,7 +67,7 @@ function App() {
                     Made with ❤️ | Website developed by S Subodh
                   </small><br></br>
                   <small>
-                    This website is developed only for Educational purpose
+                    This website is developed only for Educational/Learning purpose
                   </small>
                 </div>
               </div>
