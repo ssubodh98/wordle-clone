@@ -15,9 +15,9 @@ import * as myfn from './AppFunctions.js';
 
 function App() {
   document.documentElement.setAttribute("data-theme", "light");
-  sessionStorage.setItem("theme", "light");
+  localStorage.setItem("theme", "light");
   document.documentElement.setAttribute("color-blind", "no");
-  sessionStorage.setItem("color-blind", "no");
+  localStorage.setItem("color-blind", "no");
 
   return (
     

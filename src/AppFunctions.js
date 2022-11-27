@@ -78,12 +78,12 @@ import { toast } from 'react-toastify';
       if(color==='--color-correct'){
         colorMap.set(key,color);
         console.log("map",colorMap);
-        keyDiv.style.backgroundColor=rs.getPropertyValue(color);
+        keyDiv.style.backgroundColor="var("+color+")";
       }
     }else{
       colorMap.set(key,color);
       console.log("map",colorMap);
-      keyDiv.style.backgroundColor=rs.getPropertyValue(color);
+      keyDiv.style.backgroundColor="var("+color+")";
     }
 
     
@@ -123,7 +123,7 @@ import { toast } from 'react-toastify';
       var rs = getComputedStyle(r);
       for(let i=0;i<5;i++){
         if(typeWord.charAt(i)===guessword.charAt(i)){
-          allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-correct');
+          allWithClass[i].style.backgroundColor = "var(--color-correct)";
           //tempGuess.charAt(i)=" ";
           tempGuess = tempGuess.split('');
           tempGuess[i] = ' ';
@@ -142,7 +142,8 @@ import { toast } from 'react-toastify';
         if(temptype.charAt(i)!==' ') {
           if(tempGuess.indexOf(typeWord.charAt(i))>-1){
             let indx=tempGuess.indexOf(typeWord.charAt(i));
-            allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-present');
+            allWithClass[i].style.backgroundColor = "var(--color-present)";
+            // allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-present');
             tempGuess = tempGuess.split('');
             tempGuess[indx] = ' ';
             tempGuess = tempGuess.join('');
@@ -165,7 +166,7 @@ import { toast } from 'react-toastify';
       for(let i=0;i<5;i++){
         if(temptype.charAt(i)==='-'){
           changeKeyColor(typeWord.charAt(i), "--color-absent");
-          allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-absent');
+          allWithClass[i].style.backgroundColor = "var(--color-absent)";
         }
       }
 
@@ -201,12 +202,12 @@ import { toast } from 'react-toastify';
   }
 
   export function themeButton() {
-    const theme=sessionStorage.getItem("theme");
+    const theme=localStorage.getItem("theme");
     if(theme==="dark"){
-        sessionStorage.setItem("theme", "light");
+        localStorage.setItem("theme", "light");
         document.documentElement.setAttribute("data-theme", "light");
     }else{
-        sessionStorage.setItem("theme", "dark");
+        localStorage.setItem("theme", "dark");
         document.documentElement.setAttribute("data-theme", "dark");
     }   
     
@@ -215,17 +216,18 @@ import { toast } from 'react-toastify';
   }
 
   export function colorBlindButton() {
-    const colorBlind=sessionStorage.getItem("color-blind");
+    const colorBlind=localStorage.getItem("color-blind");
     if(colorBlind==="no"){
-        sessionStorage.setItem("color-blind", "yes");
+        localStorage.setItem("color-blind", "yes");
         document.documentElement.setAttribute("color-blind", "yes");
         // var r = document.querySelector(':root');
         // var rs = getComputedStyle(r);
         // rs.setProperty('--color-correct', ' #f5793a');
-        let root = document.documentElement;
-        root.style.setProperty('--color-correct', ' #f5793a');
+        
+        // let root = document.documentElement;
+        // root.style.setProperty('--color-correct', ' #f5793a');
     }else{
-        sessionStorage.setItem("color-blind", "no");
+        localStorage.setItem("color-blind", "no");
         document.documentElement.setAttribute("color-blind", "no");
     }   
     
