@@ -1,50 +1,40 @@
 import { toast } from 'react-toastify';
+import words from './words.js';
+import totalWords from './total-words.js';
+import { Modal } from  'bootstrap';
 
   let CurBox=0;
   let CurRow=1;
   let guessword="APPLE";//temp
   var colorMap = new Map();
 
-  // document.getElementById('A').focus();
-
   export function handleKeyDown(key){
     key=''+key.toUpperCase();
-    // useEffect(() => {
-    //   window.addEventListener('keypress', e => {
-    //     console.log(e.key)
-    //   });
-    // }, []);
-    console.log("--->"+key);
-    //console.log(key.match(/^[A-Z]$/));
-    if(key.match('ENTER')){
-      submitclicked();
-      return;
+    if(CurRow<7){
+      console.log("--->"+key);
+      if(key.match('ENTER')){
+        submitclicked();
+        return;
+      }
+      if(key.match('BACKSPACE')){
+        delclicked();
+        return;
+      }
+      if(key.match(/^[A-Z]$/)!=null){
+        buttonclickedd(key);
+        return;
+      }
     }
-    if(key.match('BACKSPACE')){
-      delclicked();
-      return;
-    }
-    if(key.match(/^[A-Z]$/)!=null){
-      buttonclickedd(key);
-      return;
-    }
-
-     
   }
 
   export function buttonclicked(e) {
-    if(CurBox<5){
-      console.log(CurRow);
+    if(CurBox<5 && CurRow<7){
+      console.log("---->"+e.target.value);
       const allWithClass = Array.from(
         document.getElementsByClassName('line'+CurRow)
       );
 
       allWithClass[CurBox].innerHTML=e.target.value;
-      // var r = document.querySelector(':root');
-      // var rs = getComputedStyle(r);
-      // allWithClass[CurBox].style.backgroundColor = rs.getPropertyValue('--key-bg');
-      // console.log(allWithClass[0].value);
-      //document.getElementById("fir").innerHTML=e.target.value;
       CurBox++;
     }
   }
@@ -71,8 +61,6 @@ import { toast } from 'react-toastify';
     var rs = getComputedStyle(r);
     const keyDiv=document.getElementById(key);
     console.log("keyDiv",keyDiv.style.backgroundColor);
-    
-    
 
     if(colorMap.has(key)){
       if(color==='--color-correct'){
@@ -86,7 +74,6 @@ import { toast } from 'react-toastify';
       keyDiv.style.backgroundColor="var("+color+")";
     }
 
-    
   }
 
   export function submitclicked() {
@@ -111,6 +98,15 @@ import { toast } from 'react-toastify';
         console.log("correct");
       }else{
         console.log("wrong");
+        if(totalWords.includes(typeWord)){
+          console.log("continue........");
+        }else{
+          console.log("return........");
+
+          toast.warn('Not in Wordlist!', { position: "top-center", autoClose: 400, hideProgressBar: true, 
+          closeOnClick: true, pauseOnHover: false, draggable: true, progress: undefined});
+          return;
+        }        
       }
 
       let tempGuess=guessword;
@@ -172,14 +168,17 @@ import { toast } from 'react-toastify';
 
       CurBox=0;
       CurRow=CurRow+1;
+      console.log("return........",CurRow);
+      if(CurRow==7){
+          var myModal = new Modal(document.getElementById("statistics-modal"), {});
+          myModal.show();
+      }
       
     }
     
   }
   
   export function delclicked() {
-    // let typeWord=getTypedWord();
-    // console.log(typeWord.substring(0,CurBox-1));
     if(CurBox>0){
       const allWithClass = Array.from(
         document.getElementsByClassName('line'+CurRow)
@@ -210,27 +209,74 @@ import { toast } from 'react-toastify';
         localStorage.setItem("theme", "dark");
         document.documentElement.setAttribute("data-theme", "dark");
     }   
-    
-
-    
   }
 
   export function colorBlindButton() {
     const colorBlind=localStorage.getItem("color-blind");
-    if(colorBlind==="no"){
-        localStorage.setItem("color-blind", "yes");
-        document.documentElement.setAttribute("color-blind", "yes");
-        // var r = document.querySelector(':root');
-        // var rs = getComputedStyle(r);
-        // rs.setProperty('--color-correct', ' #f5793a');
-        
-        // let root = document.documentElement;
-        // root.style.setProperty('--color-correct', ' #f5793a');
+    if(colorBlind==="yes"){
+      localStorage.setItem("color-blind", "no");
+      document.documentElement.setAttribute("color-blind", "no");
     }else{
-        localStorage.setItem("color-blind", "no");
-        document.documentElement.setAttribute("color-blind", "no");
-    }   
+      localStorage.setItem("color-blind", "yes");
+      document.documentElement.setAttribute("color-blind", "yes");
+    }
     
   }
+
+  export function hardmodeButton() {
+    const mode=localStorage.getItem("mode");
+    if(mode==="hard"){
+        localStorage.setItem("mode", "normal");
+    }else{
+        localStorage.setItem("mode", "hard");
+    }   
+  }
+
+  export function initialFunction() {
+    const theme=localStorage.getItem("theme");
+    if(theme==="dark"){
+        document.documentElement.setAttribute("data-theme", "dark");
+        document.getElementById('darkThemeSwitch').checked=true;
+    } else{
+        document.documentElement.setAttribute("data-theme", "light");
+        document.getElementById('darkThemeSwitch').checked=false;
+    }
+    
+    const colorBlind=localStorage.getItem("color-blind");
+    if(colorBlind==="yes"){
+        document.documentElement.setAttribute("color-blind", "yes");
+        document.getElementById('highContrastMode').checked=true;
+    } else{
+        document.documentElement.setAttribute("color-blind", "no");
+        document.getElementById('highContrastMode').checked=false;
+    }
+    
+    const mode=localStorage.getItem("mode");
+    if(mode==="hard"){
+      document.getElementById('hardModeSwitch').checked=true;
+    }else{
+      document.getElementById('hardModeSwitch').checked=false;
+    }
+
+    const date=localStorage.getItem("date");
+    var today = new Date().toLocaleDateString();
+    if(date===today){
+      console.log("today:"+today);
+      guessword=localStorage.getItem("guessword");
+      console.log("guessword:"+guessword);
+    }else{
+      console.log("set date:"+date);
+      localStorage.setItem("date", today);
+
+      const random = Math.floor(Math.random() * words.length);
+      guessword=words[random].toUpperCase();
+      console.log("guessword:"+guessword);
+      localStorage.setItem("guessword", guessword);
+    }
+
+  }
+
+
+
 
   

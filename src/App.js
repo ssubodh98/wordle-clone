@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useRef , useEffect } from 'react';
 import { AiFillSetting } from "react-icons/ai";
 import { BsBarChartLineFill } from "react-icons/bs";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
@@ -12,12 +13,15 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as myfn from './AppFunctions.js';
 
-
 function App() {
-  document.documentElement.setAttribute("data-theme", "light");
-  localStorage.setItem("theme", "light");
-  document.documentElement.setAttribute("color-blind", "no");
-  localStorage.setItem("color-blind", "no");
+  const dataFetchedRef = useRef(false);
+  
+  useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+    myfn.initialFunction(); 
+    console.log("here");
+  }, []);
 
   return (
     
@@ -102,7 +106,7 @@ function App() {
                   </div>
                 </div>
                 <div className="form-check form-switch">
-                  <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"/>
+                  <input className="form-check-input" type="checkbox" onClick={myfn.hardmodeButton} id="hardModeSwitch"/>
                 </div>
               </div>
 
@@ -116,7 +120,7 @@ function App() {
                   </div>
                 </div>
                 <div className="form-check form-switch">
-                  <input className="form-check-input" type="checkbox" onClick={myfn.themeButton} id="flexSwitchCheckDefault"/>
+                  <input className="form-check-input" type="checkbox" onClick={myfn.themeButton} id="darkThemeSwitch"/>
                 </div>
               </div>
 
@@ -132,7 +136,7 @@ function App() {
                   </div>
                 </div>
                 <div className="form-check form-switch">
-                  <input className="form-check-input" type="checkbox" onClick={myfn.colorBlindButton} id="flexSwitchCheckDefault"/>
+                  <input className="form-check-input" type="checkbox" onClick={myfn.colorBlindButton} id="highContrastMode"/>
                 </div>
               </div>
 
