@@ -176,6 +176,8 @@ import statsjson from './stats.json';
       if(CurRow==7){
           var myModal = new Modal(document.getElementById("statistics-modal"), {});
           myModal.show();
+          toast.error('Game Over!', { position: "top-right", autoClose: 800, hideProgressBar: true, 
+        closeOnClick: true, pauseOnHover: false,draggable: true, progress: undefined, theme: "light", });
       }
       
     }
@@ -284,8 +286,33 @@ import statsjson from './stats.json';
     //   localStorage.setItem("statistics",statsjson);
     // }
     // console.log("localStorage:statsjson:"+localStorage.getItem("statistics"));
+    setTimeinModal();
   }
 
+  function setTimeinModal() {
+    const tomorrow  = new Date(); 
+	  tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0);
+    var countDownDate = tomorrow.getTime();
+
+    var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("nextGameTimer").innerHTML = hours + ":"+ minutes + ":" +seconds;
+  
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("nextGameTimer").innerHTML = "00:00:00";
+    }
+  }, 1000);
+
+
+  }
 
 
 

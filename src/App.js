@@ -358,7 +358,7 @@ function App() {
               </div>
               
               <div className="mt-1">
-                NEXT WORDLE IN 22:13:04
+                NEXT WORDLE IN <span id='nextGameTimer'></span>
               </div>
               <div className="mt-1 stats-footer">
                     <button className="button spellingBeeYellow" type="button">Play Spelling Bee <GiBee/></button>

@@ -53,8 +53,8 @@ body{
 }
 
 .App .navbar-brand{
-  font-size: 36px;
-  font-weight: 700;
+  font-size: 33px;
+  font-weight: 900;
   letter-spacing: 0.01em;
   padding: 0;
   color: var(--app-color);
@@ -381,20 +381,15 @@ small{
 .guess-val{
   margin-left: 5px;
   padding: 0 10px 0 10px;
-  /* border: 1px solid #3a3a3c; */
-  background-color: #3a3a3c;
+  background-color: var(--color-tone-4);
 }
 .guess-value{
   width: 100%;
   text-align: right;
-  background-color: #538d4e;
+  background-color: var(--color-correct);
 }
 .guessdiv{
   width: 100%;
   padding: 10px;
   
-}
-
-.color-blind{
-
 }
