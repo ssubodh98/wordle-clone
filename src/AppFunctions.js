@@ -2,11 +2,13 @@ import { toast } from 'react-toastify';
 import words from './words.js';
 import totalWords from './total-words.js';
 import { Modal } from  'bootstrap';
+import statsjson from './stats.json';
 
   let CurBox=0;
   let CurRow=1;
   let guessword="APPLE";//temp
   var colorMap = new Map();
+  //export var statistics={"TotalPlayed":5,"Win":3,"Loss":2,"Streak":1,"MaxStreak":1,"Guess":[0,2,0,1,0,0]};
 
   export function handleKeyDown(key){
     key=''+key.toUpperCase();
@@ -41,7 +43,7 @@ import { Modal } from  'bootstrap';
 
   export function buttonclickedd(e) {
     if(CurBox<5){
-      console.log(CurRow);
+      //console.log(CurRow);
       const allWithClass = Array.from(
         document.getElementsByClassName('line'+CurRow)
       );
@@ -51,7 +53,7 @@ import { Modal } from  'bootstrap';
   }
 
   export function changeKeyColor(key, color) {
-    console.log("Key, Color",key, ", "+ color);
+    //console.log("Key, Color",key, ", "+ color);
     var r = document.querySelector(':root');
     var theme=document.documentElement.getAttribute("data-theme");
     if(theme==='dark'){
@@ -60,17 +62,16 @@ import { Modal } from  'bootstrap';
     
     var rs = getComputedStyle(r);
     const keyDiv=document.getElementById(key);
-    console.log("keyDiv",keyDiv.style.backgroundColor);
 
     if(colorMap.has(key)){
       if(color==='--color-correct'){
         colorMap.set(key,color);
-        console.log("map",colorMap);
+        //console.log("map",colorMap);
         keyDiv.style.backgroundColor="var("+color+")";
       }
     }else{
       colorMap.set(key,color);
-      console.log("map",colorMap);
+      //console.log("map",colorMap);
       keyDiv.style.backgroundColor="var("+color+")";
     }
 
@@ -83,27 +84,32 @@ import { Modal } from  'bootstrap';
     );
 
     if(CurBox<5){
-      toast.warn('Not Enough Letters!', {
-        position: "top-center",
-        autoClose: 400,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        });
+      if(CurRow>6){
+        return;
+      }
+      toast.warn('Not Enough Letters!', { position: "top-center", autoClose: 500, 
+      hideProgressBar: true, closeOnClick: true, pauseOnHover: false, draggable: true, progress: undefined});
+      
     }else{
       console.log(typeWord);
       if(typeWord===guessword){
         console.log("correct");
+
+        toast.success('🦄 Congrats! You Won', { position: "top-right", autoClose: 800, hideProgressBar: true, 
+        closeOnClick: true, pauseOnHover: false,draggable: true, progress: undefined, theme: "light", });
+
+        var myModal = new Modal(document.getElementById("statistics-modal"), {});
+        myModal.show();
+        CurRow=7;
+
       }else{
         console.log("wrong");
         if(totalWords.includes(typeWord)){
           console.log("continue........");
         }else{
-          console.log("return........");
+          console.log("return..Not in Wordlist");
 
-          toast.warn('Not in Wordlist!', { position: "top-center", autoClose: 400, hideProgressBar: true, 
+          toast.error('Not in Wordlist!', { position: "top-center", autoClose: 500, hideProgressBar: true, 
           closeOnClick: true, pauseOnHover: false, draggable: true, progress: undefined});
           return;
         }        
@@ -120,15 +126,14 @@ import { Modal } from  'bootstrap';
       for(let i=0;i<5;i++){
         if(typeWord.charAt(i)===guessword.charAt(i)){
           allWithClass[i].style.backgroundColor = "var(--color-correct)";
-          //tempGuess.charAt(i)=" ";
           tempGuess = tempGuess.split('');
           tempGuess[i] = ' ';
           tempGuess = tempGuess.join('');
           temptype = temptype.split('');
           temptype[i] = ' ';
           temptype = temptype.join('');
-          console.log("m tempGuess",tempGuess);
-          console.log("m temptype:",temptype);
+          //console.log("m tempGuess",tempGuess);
+          //console.log("m temptype:",temptype);
           changeKeyColor(typeWord.charAt(i), "--color-correct");
         }
         
@@ -139,7 +144,6 @@ import { Modal } from  'bootstrap';
           if(tempGuess.indexOf(typeWord.charAt(i))>-1){
             let indx=tempGuess.indexOf(typeWord.charAt(i));
             allWithClass[i].style.backgroundColor = "var(--color-present)";
-            // allWithClass[i].style.backgroundColor = rs.getPropertyValue('--color-present');
             tempGuess = tempGuess.split('');
             tempGuess[indx] = ' ';
             tempGuess = tempGuess.join('');
@@ -155,8 +159,8 @@ import { Modal } from  'bootstrap';
              
             
           }
-          console.log("tempGuess:",tempGuess);
-          console.log("temptype:",temptype);
+          //console.log("tempGuess:",tempGuess);
+          //console.log("temptype:",temptype);
         }
       }
       for(let i=0;i<5;i++){
@@ -196,7 +200,6 @@ import { Modal } from  'bootstrap';
     for(let i=0;i<CurBox;i++){
       typeWord+=allWithClass[i].innerHTML;
     }
-    //console.log(typeWord);
     return typeWord;
   }
 
@@ -274,6 +277,13 @@ import { Modal } from  'bootstrap';
       localStorage.setItem("guessword", guessword);
     }
 
+    //guessword="APPLE";//comment later
+    
+    // statistics=localStorage.getItem("statistics");
+    // if(localStorage.getItem("statistics")==null){
+    //   localStorage.setItem("statistics",statsjson);
+    // }
+    // console.log("localStorage:statsjson:"+localStorage.getItem("statistics"));
   }
 
 

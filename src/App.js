@@ -21,7 +21,14 @@ function App() {
     dataFetchedRef.current = true;
     myfn.initialFunction(); 
     console.log("here");
+
+    
   }, []);
+
+    //var statistics=JSON.parse(localStorage.getItem("statistics"));
+    var statistics={"TotalPlayed":5,"Win":3,"Loss":2,"Streak":1,"MaxStreak":1,"Guess":[0,2,0,1,0,0]};
+    //var statistics=localStorage.getItem("statistics");
+    //console.log("statistics:"+statistics);
 
   return (
     
@@ -281,7 +288,7 @@ function App() {
                 <div className="stats-boxes">
                   <div className="stats-box">
                     <div className="stats-num">
-                      1
+                      { statistics.TotalPlayed }
                     </div>
                     <div className="stats-text">
                       Played
@@ -290,7 +297,7 @@ function App() {
 
                   <div className="stats-box">
                     <div className="stats-num">
-                      100
+                      { eval( (statistics.Win /statistics.TotalPlayed) *100) }
                     </div>
                     <div className="stats-text">
                       Win %
@@ -299,7 +306,7 @@ function App() {
 
                   <div className="stats-box">
                     <div className="stats-num">
-                      1
+                      { statistics.Streak }
                     </div>
                     <div className="stats-text">
                       Current Streak
@@ -308,7 +315,7 @@ function App() {
 
                   <div className="stats-box">
                     <div className="stats-num">
-                      1
+                      { statistics.MaxStreak }
                     </div>
                     <div className="stats-text">
                       Max Streak
@@ -317,11 +324,31 @@ function App() {
 
                 </div>
 
-                <div className="mt-2 mb-1">
-                  <h6 className="modal-title" id="exampleModalLabel">GUESS DISTRIBUTION</h6>
-                  <div className="noData">
+                <div className="guessdiv mt-2 mb-1">
+                  <h6 className="stats-title" id="exampleModalLabel">GUESS DISTRIBUTION</h6>
+                  {/* <div className="noData">
                     <p className="text-center">No Data</p>  
-                  </div>
+                  </div> */}
+                  
+                  <div className="statsData">
+                  { 
+                  statistics.Guess.map((item,index) => (   
+                    <div className='statsData-box'>
+                      <div className='guess-num'>{index+1}</div>
+                      {
+                      item==0
+                      ?
+                      <div className='guess-val'>{item}</div>
+                      :
+                      <div className='guess-val guess-value'>{item}</div>
+                      }
+
+                    </div>
+                  ))
+                  }
+                  </div>  
+
+
                   <div>
 
                   </div>

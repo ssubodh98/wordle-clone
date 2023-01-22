@@ -364,6 +364,35 @@ small{
 }
 #statistics-modal .modal-title{
   letter-spacing: 0.05em;
+  font-weight: bold;
+}
+#statistics-modal .stats-title{
+  letter-spacing: 0.05em;
+  font-weight: bold;
+}
+.statsData-box{
+  display: flex;
+  padding-top: 5px;
+  
+}
+.stats-title{
+  text-align: center;
+}
+.guess-val{
+  margin-left: 5px;
+  padding: 0 10px 0 10px;
+  /* border: 1px solid #3a3a3c; */
+  background-color: #3a3a3c;
+}
+.guess-value{
+  width: 100%;
+  text-align: right;
+  background-color: #538d4e;
+}
+.guessdiv{
+  width: 100%;
+  padding: 10px;
+  
 }
 
 .color-blind{
